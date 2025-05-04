@@ -6,7 +6,10 @@
 }
 
 body {
-    background: black; /* Fixed typo: 'backgorund' to 'background' */
+    background-image: url("/imagens/planet.jpg");
+    position: fixed;
+    width: 100%;
+    height: 100%;
 }
 
 .card {
@@ -54,7 +57,7 @@ body {
     width: 16px;  
 }
 
-.iconde-tempo {
+.icone-tempo {
     width: 170px;
     margin-top: 30px;
 }
@@ -100,5 +103,18 @@ body {
     padding: 10px;
     font-size:30px;
     margin-top: -6px;
+}
+
+.tempo{
+    display: none;
+}
+.error{
+    text-align:left;
+    margin-left: 10px;
+    font-size: 14px;
+    margin-top: 10px;
+    display: none;
+
+
 }
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,8 +12,11 @@
             <input type="text" placeholder="Nome da cidade" spellcheck="false">
             <button><img src="/imagens/search.png" alt=""></button>
         </div>
+        <div class="error">
+            <p>Cidade invalida</p>
+        </div>
         <div class="tempo">
-            <img src="/imagens/rain.png" class="iconde-tempo" alt="Rain icon">
+            <img src="/imagens/rain.png" class="icone-tempo" alt="Rain icon">
             <h1 class="temperatura">20°C</h1>
             <h2 class="cidade">São Paulo</h2>
             <div class="detalhes">
@@ -37,20 +40,53 @@
 
     <script>
         const api = "e68e5bd7ec7449a15ccd476f3caf6b4d";
-        const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=São Paulo";
+        const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
 
-        async function verificarTempo(){
-            const response = await fetch(apiUrl + `&appid=${api}`);	
+        const buscarCidade = document.querySelector(".busca input");
+        const botaoBusca = document.querySelector(".busca button");
+        const imagemTempo = document.querySelector(".icone-tempo");
+
+        async function verificarTempo(cidade){
+            const response = await fetch(apiUrl + cidade + `&appid=${api}`);	
+
+            if(response.status == 404){
+                document.querySelector(".error").style.display = "block";
+                document.querySelector(".tempo").style.display = "none";
+            }else{
+
+            
             var data = await response.json();
-
-            console.log(data);
 
             document.querySelector(".cidade").innerHTML = data.name;
             document.querySelector(".temperatura").innerHTML = Math.round(data.main.temp) + "°C";
             document.querySelector(".humidade").innerHTML = data.main.humidity + "%";
             document.querySelector(".vento").innerHTML = data.wind.speed + " km/h";
+
+            if(data.weather[0].main == "Clouds"){
+                imagemTempo.src = "/imagens/clouds.png";
+            }
+            else if(data.weather[0].main == "Clear"){
+                imagemTempo.src = "/imagens/clear.png";
+            }
+            else if(data.weather[0].main == "Rain"){
+                imagemTempo.src = "/imagens/rain.png";
+            }
+            else if(data.weather[0].main == "Mist"){
+                imagemTempo.src = "/imagens/mist.png";
+            }
+            else if(data.weather[0].main == "Snow"){
+                imagemTempo.src = "/imagens/snow.png";
+            }
+
+            document.querySelector(".tempo").style.display = "block";
+            document.querySelector(".error").style.display = "block";
         }
-        verificarTempo();
+    }
+        
+        botaoBusca.addEventListener("click", () =>{
+            verificarTempo(buscarCidade.value);
+        })
+    
     </script>
 </body>
 </html>
