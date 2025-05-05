@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
     <link rel="stylesheet" href="/estrutura/stayle.css"> 
+    
 </head>
 <body>
     <div class="card">
@@ -26,7 +27,7 @@
                         <p class="humidade">50%</p>
                         <p>Humidade</p>
                     </div>
-                </div> <!-- Closing the first 'coluna' div -->
+                </div>
                 <div class="coluna"> 
                     <img src="/imagens/wind.png" alt="">
                     <div>
@@ -46,47 +47,57 @@
         const botaoBusca = document.querySelector(".busca button");
         const imagemTempo = document.querySelector(".icone-tempo");
 
-        async function verificarTempo(cidade){
-            const response = await fetch(apiUrl + cidade + `&appid=${api}`);	
+        async function verificarTempo(cidade) {
+            const response = await fetch(apiUrl + cidade + `&appid=${api}`);
 
-            if(response.status == 404){
-                document.querySelector(".error").style.display = "block";
+            if (response.status == 404) {
+                buscarCidade.value = "";
+                buscarCidade.placeholder = "Cidade inválida";
+                buscarCidade.classList.add("erro");
+
                 document.querySelector(".tempo").style.display = "none";
-            }else{
+            } else {
+                const data = await response.json();
 
-            
-            var data = await response.json();
+                document.querySelector(".cidade").innerHTML = data.name;
+                document.querySelector(".temperatura").innerHTML = Math.round(data.main.temp) + "°C";
+                document.querySelector(".humidade").innerHTML = data.main.humidity + "%";
+                document.querySelector(".vento").innerHTML = data.wind.speed + " km/h";
 
-            document.querySelector(".cidade").innerHTML = data.name;
-            document.querySelector(".temperatura").innerHTML = Math.round(data.main.temp) + "°C";
-            document.querySelector(".humidade").innerHTML = data.main.humidity + "%";
-            document.querySelector(".vento").innerHTML = data.wind.speed + " km/h";
+                if (data.weather[0].main == "Clouds") {
+                    imagemTempo.src = "/imagens/clouds.png";
+                } else if (data.weather[0].main == "Clear") {
+                    imagemTempo.src = "/imagens/clear.png";
+                } else if (data.weather[0].main == "Rain") {
+                    imagemTempo.src = "/imagens/rain.png";
+                } else if (data.weather[0].main == "Mist") {
+                    imagemTempo.src = "/imagens/mist.png";
+                } else if (data.weather[0].main == "Snow") {
+                    imagemTempo.src = "/imagens/snow.png";
+                }
 
-            if(data.weather[0].main == "Clouds"){
-                imagemTempo.src = "/imagens/clouds.png";
-            }
-            else if(data.weather[0].main == "Clear"){
-                imagemTempo.src = "/imagens/clear.png";
-            }
-            else if(data.weather[0].main == "Rain"){
-                imagemTempo.src = "/imagens/rain.png";
-            }
-            else if(data.weather[0].main == "Mist"){
-                imagemTempo.src = "/imagens/mist.png";
-            }
-            else if(data.weather[0].main == "Snow"){
-                imagemTempo.src = "/imagens/snow.png";
-            }
+                document.querySelector(".tempo").style.display = "block";
 
-            document.querySelector(".tempo").style.display = "block";
-            document.querySelector(".error").style.display = "block";
+                // Resetar input visualmente
+                buscarCidade.placeholder = "Nome da cidade";
+                buscarCidade.classList.remove("erro");
+            }
         }
-    }
-        
-        botaoBusca.addEventListener("click", () =>{
+
+        botaoBusca.addEventListener("click", () => {
             verificarTempo(buscarCidade.value);
-        })
-    
+        });
+
+        buscarCidade.addEventListener("keydown", (event) => {
+            if (event.key === "Enter") {
+                verificarTempo(buscarCidade.value);
+            }
+        });
+
+        buscarCidade.addEventListener("input", () => {
+            buscarCidade.placeholder = "Nome da cidade";
+            buscarCidade.classList.remove("erro");
+        });
     </script>
 </body>
 </html>
