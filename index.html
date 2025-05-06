@@ -65,15 +65,15 @@
                 document.querySelector(".vento").innerHTML = data.wind.speed + " km/h";
 
                 if (data.weather[0].main == "Clouds") {
-                    imagemTempo.src = "imagens/clouds.png";
+                    imagemTempo.src = "/imagens/clouds.png";
                 } else if (data.weather[0].main == "Clear") {
-                    imagemTempo.src = "imagens/clear.png";
+                    imagemTempo.src = "/imagens/clear.png";
                 } else if (data.weather[0].main == "Rain") {
-                    imagemTempo.src = "imagens/rain.png";
+                    imagemTempo.src = "/imagens/rain.png";
                 } else if (data.weather[0].main == "Mist") {
-                    imagemTempo.src = "imagens/mist.png";
+                    imagemTempo.src = "/imagens/mist.png";
                 } else if (data.weather[0].main == "Snow") {
-                    imagemTempo.src = "imagens/snow.png";
+                    imagemTempo.src = "/imagens/snow.png";
                 }
 
                 document.querySelector(".tempo").style.display = "block";
