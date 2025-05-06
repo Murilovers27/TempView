@@ -4,33 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
-    <link rel="icon" type="image/png" href="/TempView/estrutura/imagens/sun.png">
-    <link rel="stylesheet" href="/TempView/estrutura/stayle.css"> 
+    <link rel="icon" type="image/png" href="TempView/estrutura/imagens/sun.png">
+    <link rel="stylesheet" href="TempView/estrutura/stayle.css"> 
     
 </head>
 <body>
     <div class="card">
         <div class="busca">
             <input type="text" placeholder="Nome da cidade" spellcheck="false">
-            <button><img src="/TempView/estrutura/imagens/search.png" alt=""></button>
+            <button><img src="TempView/estrutura/imagens/search.png" alt=""></button>
         </div>
         <div class="error">
             <p>Cidade invalida</p>
         </div>
         <div class="tempo">
-            <img src="/TempView/estrutura/imagens/rain.png" class="icone-tempo" alt="Rain icon">
+            <img src="TempView/estrutura/imagens/rain.png" class="icone-tempo" alt="Rain icon">
             <h1 class="temperatura">20°C</h1>
             <h2 class="cidade">São Paulo</h2>
             <div class="detalhes">
                 <div class="coluna">
-                    <img src="/TempView/estrutura/imagens/humidity.png" alt="">
+                    <img src="TempView/estrutura/imagens/humidity.png" alt="">
                     <div>
                         <p class="humidade">50%</p>
                         <p>Humidade</p>
                     </div>
                 </div>
                 <div class="coluna"> 
-                    <img src="/TempView/estrutura/imagens/wind.png" alt="">
+                    <img src="TempView/estrutura/imagens/wind.png" alt="">
                     <div>
                         <p class="vento">12 km/h</p>
                         <p>Velocidade do vento</p>
@@ -66,15 +66,15 @@
                 document.querySelector(".vento").innerHTML = data.wind.speed + " km/h";
 
                 if (data.weather[0].main == "Clouds") {
-                    imagemTempo.src = "/TempView/estrutura/imagens/clouds.png";
+                    imagemTempo.src = "TempView/estrutura/imagens/clouds.png";
                 } else if (data.weather[0].main == "Clear") {
-                    imagemTempo.src = "/TempView/estrutura/imagens/clear.png";
+                    imagemTempo.src = "TempView/estrutura/imagens/clear.png";
                 } else if (data.weather[0].main == "Rain") {
-                    imagemTempo.src = "/TempView/estrutura/imagens/rain.png";
+                    imagemTempo.src = "TempView/estrutura/imagens/rain.png";
                 } else if (data.weather[0].main == "Mist") {
-                    imagemTempo.src = "/TempView/estrutura/imagens/mist.png";
+                    imagemTempo.src = "TempView/estrutura/imagens/mist.png";
                 } else if (data.weather[0].main == "Snow") {
-                    imagemTempo.src = "/TempView/estrutura/imagens/snow.png";
+                    imagemTempo.src = "TempView/estrutura/imagens/snow.png";
                 }
 
                 document.querySelector(".tempo").style.display = "block";
