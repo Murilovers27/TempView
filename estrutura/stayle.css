@@ -8,7 +8,7 @@
 }
 
 body {
-    background-image: url("/TempView/estrutura/imagens/planet.jpg");
+    background-image: url("TempView/estrutura/imagens/planet.jpg");
     background-size: cover;
     background-position: center;
     min-height: 150vh;
